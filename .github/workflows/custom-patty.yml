@@ -16,7 +16,7 @@ jobs:
         with: { node-version-file: ui/package.json }
       - uses: pnpm/action-setup@v4
         with: { package_json_file: ui/package.json }
-      - run: pnpm --dir ui install
+      - run: sudo apt-get update && sudo apt-get install -y make build-essential git
       - run: |
           pwd; ls -la; ls -la .git 2>&1 | head -n 5; git status --porcelain 2>&1 | head -n 20
       - run: make bin
