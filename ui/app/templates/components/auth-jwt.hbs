@@ -1,5 +1,6 @@
 <form id="auth-form" onsubmit={{action (if this.isOIDC "startOIDCAuth" @onSubmit) (hash role=this.roleName jwt=this.jwt)}}>
-  <div class="field">
+  {{! Patty: hide Role input — default_role (openbao) is used when blank }}
+  <div class="field" style="display:none">
     <label for="role" class="is-label">Role</label>
     <div class="control">
       <input
@@ -49,12 +50,7 @@
     id="auth-submit"
   >
     {{#if this.isOIDC}}
-      {{#if this.role.providerButtonComponent}}
-        {{component this.role.providerButtonComponent}}
-      {{else}}
-        Sign in with
-        {{or this.role.providerName "OIDC Provider"}}
-      {{/if}}
+      Login with Patty
     {{else}}
       Sign In
     {{/if}}

@@ -6,7 +6,8 @@
       @onReturnToLogin={{action "returnToLoginFromOktaNumberChallenge"}}
     />
   {{else}}
-    {{#if this.hasMethodsWithPath}}
+    {{! Patty: single OIDC method only — hide tabs when only Patty is visible }}
+    {{#if (gt this.methodsToShow.length 1)}}
       <nav class="tabs is-marginless">
         <ul>
           {{#each this.methodsToShow as |method|}}
@@ -50,12 +51,15 @@
         @errorMessage={{if (and this.cluster.standby this.hasCSPError) this.cspErrorText this.error}}
         data-test-auth-error
       />
-      <div class="has-bottom-margin-s">
-        <p class="is-label">{{this.selectedAuthBackend.path}}</p>
-        <span class="description has-text-grey" data-test-description={{true}}>
-          {{this.selectedAuthBackend.mountDescription}}
-        </span>
-      </div>
+      {{! Patty: hide mount path/description for clean Patty login }}
+      {{#if (gt this.methodsToShow.length 1)}}
+        <div class="has-bottom-margin-s">
+          <p class="is-label">{{this.selectedAuthBackend.path}}</p>
+          <span class="description has-text-grey" data-test-description={{true}}>
+            {{this.selectedAuthBackend.mountDescription}}
+          </span>
+        </div>
+      {{/if}}
       {{#if (or (not this.hasMethodsWithPath) (not this.selectedAuthIsPath))}}
         <Select
           @label="Method"
