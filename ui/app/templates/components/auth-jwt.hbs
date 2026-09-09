@@ -1,14 +1,17 @@
 <form id="auth-form" onsubmit={{action (if this.isOIDC "startOIDCAuth" @onSubmit) (hash role=this.roleName jwt=this.jwt)}}>
-  {{! Patty: hide Role input — default_role (openbao) is used when blank }}
-  <div class="field" style="display:none">
+  {{! Patty: Role input is hidden AND unbound — default_role (openbao) is always
+    used. Never bind browser input here: autofill can write junk into the hidden
+    field, which the backend rejects with "role could not be found". }}
+  <div class="field" style="display:none" aria-hidden="true">
     <label for="role" class="is-label">Role</label>
     <div class="control">
       <input
-        value={{@roleName}}
+        value=""
         placeholder="Default"
-        oninput={{perform this.fetchRole value="target.value"}}
         autocomplete="off"
         spellcheck="false"
+        readonly
+        tabindex="-1"
         name="role"
         id="role"
         class="input"
