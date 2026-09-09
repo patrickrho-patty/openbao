@@ -18,7 +18,7 @@ jobs:
         with: { node-version-file: ui/package.json }
       - uses: pnpm/action-setup@v4
         with: { package_json_file: ui/package.json }
-      - run: sudo rm -f /etc/apt/sources.list.d/google-chrome.list && sudo apt-get update && sudo apt-get install -y make build-essential git
+      - run: make --version && git --version && gcc --version | head -n 1
       - run: make static-dist
       - run: make bin
       - run: mkdir -p bin/amd64 && cp bin/bao bin/amd64/bao && ls -la bin/amd64/
