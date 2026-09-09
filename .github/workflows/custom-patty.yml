@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: [self-hosted, garm, linux, x64]
+    runs-on: [ubuntu-latest]
     permissions: { contents: read }
     steps:
       - uses: actions/checkout@v4
@@ -17,8 +17,6 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { package_json_file: ui/package.json }
       - run: sudo apt-get update && sudo apt-get install -y make build-essential git
-      - run: |
-          echo "GITHUB_WORKSPACE=$GITHUB_WORKSPACE"; ls -la $GITHUB_WORKSPACE 2>&1 | head -n 20; ls -la $GITHUB_WORKSPACE/.git 2>&1 | head -n 10; echo "--- pwd ls ---"; pwd; ls -la 2>&1 | head -n 20; echo "--- git rev-parse ---"; git rev-parse --git-dir 2>&1 | head
       - run: make bin
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
