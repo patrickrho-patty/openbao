@@ -17,31 +17,29 @@
     </div>
   </Page.altContent>
   <Page.header>
-    {{#if this.oidcProvider}}
-      <div class="box is-shadowless is-flex-v-centered" data-test-auth-logo>
-        <LogoEdition aria-label="Sign in with Patty Secrets" />
-      </div>
-    {{else}}
-      <div class="is-flex-v-centered has-bottom-margin-m" data-test-auth-logo>
-        <LogoEdition aria-label="Patty Secrets" />
-      </div>
-      <div class="is-flex-v-centered has-bottom-margin-xxl">
-        <div class="brand-icon-large">
-          <img src={{img-path "~/patty-secrets-symbol.png"}} alt="" aria-hidden="true" style="height: 48px; width: auto;" />
-        </div>
-      </div>
+    {{! Patty: symbol left, text logo right on a single line }}
+    <div class="is-flex-v-centered has-bottom-margin-xxl" data-test-auth-logo style="gap: 16px;">
+      <img
+        src={{img-path "~/patty-secrets-symbol.png"}}
+        alt=""
+        aria-hidden="true"
+        style="height: 44px; width: auto;"
+      />
+      <LogoEdition aria-label="Patty Secrets" />
+    </div>
+    {{#if (or this.mfaAuthData this.waitingForOktaNumberChallenge)}}
       <div class="is-flex-row">
         {{#if this.mfaAuthData}}
           <button type="button" class="icon-button" {{on "click" (fn (mut this.mfaAuthData) null)}}>
             <Icon @name="arrow-left" @size="24" aria-label="Back to login" class="icon-blue" />
           </button>
-        {{else if this.waitingForOktaNumberChallenge}}
+        {{else}}
           <button type="button" class="icon-button" {{on "click" (action "cancelAuthentication")}}>
             <Icon @name="arrow-left" @size="24" aria-label="Back to login" class="icon-blue" />
           </button>
         {{/if}}
         <h1 class="title is-3">
-          {{if (or this.mfaAuthData this.waitingForOktaNumberChallenge) "Authenticate" "Patty Secrets"}}
+          Authenticate
         </h1>
       </div>
     {{/if}}
