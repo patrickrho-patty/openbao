@@ -6,7 +6,9 @@ on:
 
 jobs:
   build:
-    runs-on: [ubuntu-latest]
+    # NOTE: must stay on GARM — registry.patty.io is tailnet-only
+    # (no public DNS) so github-hosted runners can never push to it.
+    runs-on: [self-hosted, garm, linux, x64]
     permissions: { contents: read }
     steps:
       - uses: actions/checkout@v4
