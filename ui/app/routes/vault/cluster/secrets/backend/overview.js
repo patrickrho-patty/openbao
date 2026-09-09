@@ -85,7 +85,7 @@ export default Route.extend({
       if (noConnectionCapabilities) {
         return 'You cannot yet generate credentials.  Ask your administrator if you think you should have access.';
       } else {
-        return 'You can connect an external database to OpenBao.  We recommend that you create a user for OpenBao rather than using the database root user.';
+        return 'You can connect an external database to Patty Secrets.  We recommend that you create a user for Patty Secrets rather than using the database root user.';
       }
     };
     controller.set('showEmptyState', showEmptyState);

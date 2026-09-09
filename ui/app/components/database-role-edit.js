@@ -102,7 +102,7 @@ export default class DatabaseRoleEdit extends Component {
       .catch((e) => {
         const errorMessage = e.errors?.join('. ') || e.message;
         this.flashMessages.danger(
-          errorMessage || 'Could not save the role. Please check OpenBao logs for more information.'
+          errorMessage || 'Could not save the role. Please check Patty Secrets logs for more information.'
         );
         this.loading = false;
       });

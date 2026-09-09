@@ -49,7 +49,7 @@ export default class KeymgmtProviderModel extends Model {
   @attr('string', {
     label: 'Provider name',
     subText:
-      'This is the name of the provider that will be displayed in OpenBao. This cannot be edited later.',
+      'This is the name of the provider that will be displayed in Patty Secrets. This cannot be edited later.',
   })
   name;
 

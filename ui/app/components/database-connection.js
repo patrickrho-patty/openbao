@@ -14,10 +14,10 @@ const SHOW_ROUTE = 'vault.cluster.secrets.backend.show';
 
 const getErrorMessage = (errors) => {
   let errorMessage =
-    errors?.join('. ') || 'Something went wrong. Check the OpenBao logs for more information.';
+    errors?.join('. ') || 'Something went wrong. Check the Patty Secrets logs for more information.';
   if (errorMessage.indexOf('failed to verify') >= 0) {
     errorMessage =
-      'There was a verification error for this connection. Check the OpenBao logs for more information.';
+      'There was a verification error for this connection. Check the Patty Secrets logs for more information.';
   }
   return errorMessage;
 };

@@ -26,8 +26,8 @@ export default class PkiConfigCrlModel extends Model {
     mapToBoolean: 'autoRebuild',
     isOppositeValue: false,
     editType: 'ttl',
-    helperTextEnabled: 'OpenBao will rebuild the CRL in the below grace period before expiration',
-    helperTextDisabled: 'OpenBao will not automatically rebuild the CRL',
+    helperTextEnabled: 'Patty Secrets will rebuild the CRL in the below grace period before expiration',
+    helperTextDisabled: 'Patty Secrets will not automatically rebuild the CRL',
   })
   autoRebuildGracePeriod;
 
@@ -38,8 +38,8 @@ export default class PkiConfigCrlModel extends Model {
     mapToBoolean: 'enableDelta',
     isOppositeValue: false,
     editType: 'ttl',
-    helperTextEnabled: 'OpenBao will rebuild the delta CRL at the interval below:',
-    helperTextDisabled: 'OpenBao will not rebuild the delta CRL at an interval',
+    helperTextEnabled: 'Patty Secrets will rebuild the delta CRL at the interval below:',
+    helperTextDisabled: 'Patty Secrets will not rebuild the delta CRL at an interval',
   })
   deltaRebuildInterval;
 

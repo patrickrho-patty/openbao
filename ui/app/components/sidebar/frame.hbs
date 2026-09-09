@@ -4,13 +4,20 @@
       <:header>
         <Hds::SideNav::Header>
           <:logo>
-            <Sidebar::Header::HomeLink
-              @icon="openbao"
+            <Hds::Interactive
+              class="hds-side-nav__home-link"
               @route={{if this.currentCluster.cluster.name "vault.cluster"}}
               @model={{this.currentCluster.cluster.name}}
-              @ariaLabel="home link"
+              aria-label="Patty Secrets home"
               data-test-sidebar-logo
-            />
+            >
+              <img
+                src={{img-path "~/patty-secrets-symbol.png"}}
+                alt=""
+                aria-hidden="true"
+                style="height: 32px; width: auto;"
+              />
+            </Hds::Interactive>
           </:logo>
           <:actions>
             <Hds::SideNav::Header::IconButton

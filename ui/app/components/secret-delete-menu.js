@@ -14,7 +14,7 @@ import transitionToSafe from 'vault/utils/transition-to-safe';
 
 const getErrorMessage = (errors) => {
   const errorMessage =
-    errors?.join('. ') || 'Something went wrong. Check the OpenBao logs for more information.';
+    errors?.join('. ') || 'Something went wrong. Check the Patty Secrets logs for more information.';
   return errorMessage;
 };
 export default class SecretDeleteMenu extends Component {

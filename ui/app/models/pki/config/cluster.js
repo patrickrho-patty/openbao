@@ -27,11 +27,11 @@ export default class PkiConfigClusterModel extends Model {
   @attr('string', {
     label: 'AIA path',
     subText:
-      "Specifies the path to this performance replication cluster's AIA distribution point; may refer to an external, non-OpenBao responder.",
+      "Specifies the path to this performance replication cluster's AIA distribution point; may refer to an external, non-Patty Secrets responder.",
   })
   aiaPath;
 
-  // this is for pki-only cluster config, not the universal OpenBao cluster
+  // this is for pki-only cluster config, not the universal Patty Secrets cluster
   @lazyCapabilities(apiPath`${'id'}/config/cluster`, 'id') clusterPath;
 
   get canSet() {

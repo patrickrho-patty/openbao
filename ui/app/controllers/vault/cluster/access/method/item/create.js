@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2026 OpenBao a Series of LF Projects, LLC
+ * Copyright (c) 2026 Patty Secrets a Series of LF Projects, LLC
  * SPDX-License-Identifier: MPL-2.0
  */
 
