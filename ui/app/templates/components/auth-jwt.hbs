@@ -39,14 +39,16 @@
       </div>
     </div>
   {{/unless}}
-  <div data-test-yield-content>
-    {{yield}}
-  </div>
+  {{#unless this.isOIDC}}
+    <div data-test-yield-content>
+      {{yield}}
+    </div>
+  {{/unless}}
   <button
     data-test-auth-submit={{true}}
     type="submit"
     disabled={{@disabled}}
-    class="button is-primary {{if @disabled 'is-loading'}}"
+    class="button is-primary is-fullwidth {{if @disabled 'is-loading'}}"
     id="auth-submit"
   >
     {{#if this.isOIDC}}

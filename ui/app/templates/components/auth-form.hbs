@@ -6,72 +6,16 @@
       @onReturnToLogin={{action "returnToLoginFromOktaNumberChallenge"}}
     />
   {{else}}
-    {{! Patty: single OIDC method only — hide tabs when only Patty is visible }}
-    {{#if (gt this.methodsToShow.length 1)}}
-      <nav class="tabs is-marginless">
-        <ul>
-          {{#each this.methodsToShow as |method|}}
-            {{#let (or method.path method.type) as |methodKey|}}
-              <li
-                class={{if
-                  (and
-                    this.selectedAuthIsPath (eq (or this.selectedAuthBackend.path this.selectedAuthBackend.type) methodKey)
-                  )
-                  "is-active"
-                  ""
-                }}
-                data-test-auth-method={{method.id}}
-              >
-                <LinkTo
-                  @route="vault.cluster.auth"
-                  @model={{this.cluster.name}}
-                  @query={{hash with=methodKey}}
-                  data-test-auth-method-link={{method.type}}
-                >
-                  {{or method.id (capitalize method.type)}}
-                </LinkTo>
-              </li>
-            {{/let}}
-          {{/each}}
-          <li class={{unless this.selectedAuthIsPath "is-active" ""}} data-test-auth-method>
-            <LinkTo
-              @route="vault.cluster.auth"
-              @model={{this.cluster.name}}
-              @query={{hash with="token"}}
-              data-test-auth-method-link="other"
-            >
-              Other
-            </LinkTo>
-          </li>
-        </ul>
-      </nav>
-    {{/if}}
+    {{! Patty: single OIDC method only — tabs hidden, Login with Patty button only.
+      Token fallback still reachable via ?with=token URL. }}
     <div class="box is-marginless is-shadowless">
       <MessageError
         @errorMessage={{if (and this.cluster.standby this.hasCSPError) this.cspErrorText this.error}}
         data-test-auth-error
       />
-      {{! Patty: hide mount path/description for clean Patty login }}
-      {{#if (gt this.methodsToShow.length 1)}}
-        <div class="has-bottom-margin-s">
-          <p class="is-label">{{this.selectedAuthBackend.path}}</p>
-          <span class="description has-text-grey" data-test-description={{true}}>
-            {{this.selectedAuthBackend.mountDescription}}
-          </span>
-        </div>
-      {{/if}}
-      {{#if (or (not this.hasMethodsWithPath) (not this.selectedAuthIsPath))}}
-        <Select
-          @label="Method"
-          @name="auth-method"
-          @options={{this.authMethods}}
-          @valueAttribute={{"type"}}
-          @labelAttribute={{"typeDisplay"}}
-          @isFullwidth={{true}}
-          @selectedValue={{this.selectedAuth}}
-          @onChange={{action (mut this.selectedAuth)}}
-        />
-      {{/if}}
+      {{! Patty: mount path/description hidden for clean single-button login }}
+      {{! Patty: Method dropdown hidden for OIDC — single Login with Patty button only.
+        Token fallback (?with=token) still renders its own form without the dropdown. }}
       {{#if (or (eq this.selectedAuthBackend.type "jwt") (eq this.selectedAuthBackend.type "oidc"))}}
         <AuthJwt
           @onError={{action "handleError"}}

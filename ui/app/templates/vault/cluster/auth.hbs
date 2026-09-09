@@ -19,12 +19,15 @@
   <Page.header>
     {{#if this.oidcProvider}}
       <div class="box is-shadowless is-flex-v-centered" data-test-auth-logo>
-        <LogoEdition aria-label="Sign in with OpenBao" />
+        <LogoEdition aria-label="Sign in with Patty Secrets" />
       </div>
     {{else}}
+      <div class="is-flex-v-centered has-bottom-margin-m" data-test-auth-logo>
+        <LogoEdition aria-label="Patty Secrets" />
+      </div>
       <div class="is-flex-v-centered has-bottom-margin-xxl">
         <div class="brand-icon-large">
-          <Icon @name="openbao" @size="24" @stretched={{true}} />
+          <img src={{img-path "~/patty-secrets-symbol.png"}} alt="" aria-hidden="true" style="height: 48px; width: auto;" />
         </div>
       </div>
       <div class="is-flex-row">
@@ -43,36 +46,7 @@
       </div>
     {{/if}}
   </Page.header>
-  {{#unless this.mfaAuthData}}
-    <Page.sub-header>
-      <Toolbar class="toolbar-namespace-picker">
-        <div class="field is-horizontal" data-test-namespace-toolbar>
-          <div class="field-label is-normal">
-            <label class="is-label" for="namespace">Namespace</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input
-                  data-test-auth-form-ns-input
-                  value={{this.namespaceQueryParam}}
-                  placeholder="/ (Root)"
-                  oninput={{perform this.updateNamespace value="target.value"}}
-                  autocomplete="off"
-                  spellcheck="false"
-                  name="namespace"
-                  id="namespace"
-                  class="input"
-                  type="text"
-                  disabled={{this.oidcProvider}}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </Toolbar>
-    </Page.sub-header>
-  {{/unless}}
+  {{! Patty: namespace picker hidden — single-tenant login }}
   <Page.content>
     {{#if this.mfaAuthData}}
       <Mfa::MfaForm
@@ -96,16 +70,4 @@
       />
     {{/if}}
   </Page.content>
-  <Page.footer>
-    <div class="has-short-padding">
-      <p class="help has-text-grey-dark" data-test-auth-helptext>
-        {{#if this.oidcProvider}}
-          Once you log in, you will be redirected back to your application. If you require login credentials, contact your
-          administrator.
-        {{else}}
-          Contact your administrator for login credentials
-        {{/if}}
-      </p>
-    </div>
-  </Page.footer>
 </SplashPage>
