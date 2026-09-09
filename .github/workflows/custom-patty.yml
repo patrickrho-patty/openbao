@@ -31,8 +31,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            registry.patty.io/openbao:custom
-            registry.patty.io/openbao:${{ github.sha }}
-          cache-from: type=registry,ref=registry.patty.io/openbao:buildcache
-          cache-to: type=registry,ref=registry.patty.io/openbao:buildcache,mode=max
+            registry.patty.io/patty-secrets/openbao:custom
+            registry.patty.io/patty-secrets/openbao:${{ github.sha }}
+          cache-from: type=registry,ref=registry.patty.io/patty-secrets/openbao:buildcache
+          cache-to: type=registry,ref=registry.patty.io/patty-secrets/openbao:buildcache,mode=max
           platforms: linux/amd64
