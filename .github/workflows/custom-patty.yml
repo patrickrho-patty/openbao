@@ -19,6 +19,19 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { package_json_file: ui/package.json }
       - run: make --version && git --version && gcc --version | head -n 1
+      - name: Cache pnpm store
+        run: echo "PNPM_STORE=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - uses: actions/cache@v4
+        with:
+          path: ${{ env.PNPM_STORE }}
+          key: pnpm-store-${{ hashFiles('ui/pnpm-lock.yaml') }}
+      - name: Cache Go modules and build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: go-${{ runner.os }}-${{ hashFiles('go.sum', '.go-version') }}
       - run: make static-dist
       - run: make bin
       - run: mkdir -p bin/amd64 && cp bin/bao bin/amd64/bao && ls -la bin/amd64/

@@ -28,3 +28,11 @@
 .splash-page-header {
   padding: $size-6 0;
 }
+
+// Patty: keep the single-button login card narrow instead of
+// stretching to the full column width on wide screens.
+.login-form.box {
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
