@@ -78,7 +78,13 @@
 // if using @stretched on FlightIcon there must be an explicit height set on the parent if used in a flexbox
 // without height set the flexbox will scale out of proportion on Safari
 
+// The logo SVGs carry a large intrinsic size (2638x1215). Setting only
+// height:auto leaves width to be resolved by the flex container, which stretches
+// the viewBox and distorts the wordmark -- and because the available width varies
+// with the viewport, it looked fine at some window sizes and squashed at others.
+// Pin width too so the aspect ratio is always preserved.
 .openbao-logo {
+  width: 100%;
   height: auto;
 }
 
